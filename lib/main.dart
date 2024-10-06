@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ticket_app/base/bottom_nav_bar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,16 +10,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(),
-      home: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.red,
-            title: const Text("Flutter title"),
-            centerTitle: true,
-          ),
-          body: const Center(child: Text('Hello Flutter'))),
+    return const MaterialApp(
+      home: BottomNavBar(),
     );
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ticket_app/base/res/styles/app_styles.dart';
-import 'package:ticket_app/base/utils/all_json.dart';
 import 'package:ticket_app/base/widgets/app_column_text_layout.dart';
 import 'package:ticket_app/base/widgets/app_layoutbuilder_widget.dart';
 import 'package:ticket_app/base/widgets/big_circle.dart';
@@ -10,18 +9,18 @@ import 'package:ticket_app/base/widgets/text_style_third.dart';
 
 class TicketView extends StatelessWidget {
   final Map<String, dynamic> ticket;
-  const TicketView({super.key, required this.ticket});
+  final bool wholeScreen;
+  const TicketView({super.key, required this.ticket, this.wholeScreen = false});
 
   @override
   Widget build(BuildContext context) {
-
     final size = MediaQuery.of(context).size;
 
     return SizedBox(
       width: size.width * 0.85,
       height: 189,
       child: Container(
-        margin: const EdgeInsets.only(right: 16),
+        margin: EdgeInsets.only(right: wholeScreen ? 0 : 16),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -38,7 +37,9 @@ class TicketView extends StatelessWidget {
                   //show departure and destination with icons first line
                   Row(
                     children: [
-                      TextStyleThird(text: ticket["from"]["code"],),
+                      TextStyleThird(
+                        text: ticket["from"]["code"],
+                      ),
                       Expanded(child: Container()),
                       const BigDot(),
                       //ticket flying icon
@@ -62,7 +63,9 @@ class TicketView extends StatelessWidget {
                       )),
                       const BigDot(),
                       Expanded(child: Container()),
-                      TextStyleThird(text: ticket["to"]["code"],),
+                      TextStyleThird(
+                        text: ticket["to"]["code"],
+                      ),
                     ],
                   ),
                   const SizedBox(
@@ -71,16 +74,23 @@ class TicketView extends StatelessWidget {
                   //show departure and destination names with time
                   Row(
                     children: [
-                       SizedBox(
+                      SizedBox(
                         width: 100,
-                        child: TextStyleFourth(text: ticket["from"]["name"],),
+                        child: TextStyleFourth(
+                          text: ticket["from"]["name"],
+                        ),
                       ),
                       Expanded(child: Container()),
-                      TextStyleFourth(text: ticket["flying_time"],),
+                      TextStyleFourth(
+                        text: ticket["flying_time"],
+                      ),
                       Expanded(child: Container()),
                       SizedBox(
                         width: 100,
-                        child: TextStyleFourth(text: ticket["to"]["name"], align: TextAlign.end,),
+                        child: TextStyleFourth(
+                          text: ticket["to"]["name"],
+                          align: TextAlign.end,
+                        ),
                       )
                     ],
                   )
@@ -95,7 +105,11 @@ class TicketView extends StatelessWidget {
                   BigCircle(
                     isRight: false,
                   ),
-                  Expanded(child: AppLayoutBuilderWidget(randomDivider: 16,width: 6,)),
+                  Expanded(
+                      child: AppLayoutBuilderWidget(
+                    randomDivider: 16,
+                    width: 6,
+                  )),
                   BigCircle(
                     isRight: true,
                   )
@@ -110,7 +124,7 @@ class TicketView extends StatelessWidget {
                   borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(21),
                       bottomRight: Radius.circular(21))),
-              child:  Column(
+              child: Column(
                 children: [
                   //show departure and destination with icons first line
                   Row(
